@@ -71,8 +71,6 @@ class MainViewController: UITableViewController {
         newPlaceVC.saveNewPlace()
         places.append(newPlaceVC.newPlace!)
         tableView.reloadData()
-        
-    
     }
     
     
