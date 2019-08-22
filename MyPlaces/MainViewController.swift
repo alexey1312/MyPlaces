@@ -39,9 +39,20 @@ class MainViewController: UITableViewController {
 
         cell.textLabel?.text = restaurantNames[indexPath.row]
         cell.imageView?.image = UIImage(named: restaurantNames[indexPath.row])
-
+        cell.imageView?.layer.cornerRadius = cell.frame.size.height / 2 //Сделать границы изображения круглыми
+        cell.imageView?.clipsToBounds = true //Обрезать изображения по границе
+        
         return cell
     }
+
+    // MARK: - Tabble view delegate
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let heightForRowAt = 85
+        
+        return CGFloat(heightForRowAt)
+    }
+    
 
     /*
     // MARK: - Navigation
