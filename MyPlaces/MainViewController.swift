@@ -12,7 +12,7 @@ class MainViewController: UITableViewController {
     
 
 
-    let place = Place.getPlace()
+    var places = Place.getPlace()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,32 +27,33 @@ class MainViewController: UITableViewController {
 //    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return place.count
+        return places.count
     }
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
+        
+        
+        let place = places[indexPath.row]
 
-        cell.nameLabel.text = place[indexPath.row].name
-        cell.locationLabel.text = place[indexPath.row].location
-        cell.typeLabel.text = place[indexPath.row].type
-        cell.imageOfPlace.image = UIImage(named: place[indexPath.row].image)
+        cell.nameLabel.text = place.name
+        cell.locationLabel.text = place.location
+        cell.typeLabel.text = place.type
+        
+        if place.image == nil {
+            cell.imageOfPlace.image = UIImage(named: place.restaurantImage!)
+        } else {
+            cell.imageOfPlace.image = place.image
+        }
+        
+        
         cell.imageOfPlace.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 2 //Сделать границы изображения круглыми
         cell.imageOfPlace.clipsToBounds = true //Обрезать изображения по границе
         
         return cell
     }
-
-    // MARK: - Tabble view delegate
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let heightForRowAt = 85
-        
-        return CGFloat(heightForRowAt)
-    }
-    
-
+ 
     /*
     // MARK: - Navigation
 
@@ -63,6 +64,16 @@ class MainViewController: UITableViewController {
     }
     */
     
-    @IBAction func cacelAction(_ segue: UIStoryboardSegue) {}
-
+    @IBAction func unwindSegue(_ segue: UIStoryboardSegue) {
+        
+        guard let newPlaceVC = segue.source as? NewPlaceViewController else { return }
+        
+        newPlaceVC.saveNewPlace()
+        places.append(newPlaceVC.newPlace!)
+        tableView.reloadData()
+        
+    
+    }
+    
+    
 }
