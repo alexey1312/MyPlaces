@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		843E4644230EBE2300E25493 /* CustomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843E4643230EBE2300E25493 /* CustomTableViewCell.swift */; };
+		843E4646230EC50000E25493 /* PlaceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 843E4645230EC50000E25493 /* PlaceModel.swift */; };
 		84781AC2230E70C800A6AF1E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84781AC1230E70C800A6AF1E /* AppDelegate.swift */; };
 		84781AC4230E70C800A6AF1E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84781AC3230E70C800A6AF1E /* SceneDelegate.swift */; };
 		84781AC9230E70C800A6AF1E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 84781AC7230E70C800A6AF1E /* Main.storyboard */; };
@@ -18,6 +19,7 @@
 
 /* Begin PBXFileReference section */
 		843E4643230EBE2300E25493 /* CustomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTableViewCell.swift; sourceTree = "<group>"; };
+		843E4645230EC50000E25493 /* PlaceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceModel.swift; sourceTree = "<group>"; };
 		84781ABE230E70C800A6AF1E /* MyPlaces.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyPlaces.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		84781AC1230E70C800A6AF1E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		84781AC3230E70C800A6AF1E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				84781AC1230E70C800A6AF1E /* AppDelegate.swift */,
 				84781AC3230E70C800A6AF1E /* SceneDelegate.swift */,
 				84781AD5230E76E200A6AF1E /* MainViewController.swift */,
+				843E4645230EC50000E25493 /* PlaceModel.swift */,
 				843E4643230EBE2300E25493 /* CustomTableViewCell.swift */,
 				84781AC7230E70C800A6AF1E /* Main.storyboard */,
 				84781ACA230E70C900A6AF1E /* Assets.xcassets */,
@@ -143,6 +146,7 @@
 			files = (
 				84781AD6230E76E200A6AF1E /* MainViewController.swift in Sources */,
 				84781AC2230E70C800A6AF1E /* AppDelegate.swift in Sources */,
+				843E4646230EC50000E25493 /* PlaceModel.swift in Sources */,
 				843E4644230EBE2300E25493 /* CustomTableViewCell.swift in Sources */,
 				84781AC4230E70C800A6AF1E /* SceneDelegate.swift in Sources */,
 			);

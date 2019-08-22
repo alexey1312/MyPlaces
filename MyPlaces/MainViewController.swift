@@ -10,13 +10,10 @@ import UIKit
 
 class MainViewController: UITableViewController {
     
-    let restaurantNames = [
-        "Burger Heroes", "Kitchen", "Bonsai", "Дастархан",
-        "Индокитай", "X.O", "Балкан Гриль", "Sherlock Holmes",
-        "Speak Easy", "Morris Pub", "Вкусные истории",
-        "Классик", "Love&Life", "Шок", "Бочка"
-    ]
 
+
+    let place = Place.getPlace()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,17 +27,17 @@ class MainViewController: UITableViewController {
 //    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return restaurantNames.count
+        return place.count
     }
 
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
 
-        cell.nameLabel.text = restaurantNames[indexPath.row]
-        cell.locationLabel.text = restaurantNames[indexPath.row]
-        cell.typeLabel.text = restaurantNames[indexPath.row]
-        cell.imageOfPlace.image = UIImage(named: restaurantNames[indexPath.row])
+        cell.nameLabel.text = place[indexPath.row].name
+        cell.locationLabel.text = place[indexPath.row].location
+        cell.typeLabel.text = place[indexPath.row].type
+        cell.imageOfPlace.image = UIImage(named: place[indexPath.row].image)
         cell.imageOfPlace.layer.cornerRadius = cell.imageOfPlace.frame.size.height / 2 //Сделать границы изображения круглыми
         cell.imageOfPlace.clipsToBounds = true //Обрезать изображения по границе
         
@@ -65,5 +62,7 @@ class MainViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    @IBAction func cacelAction(_ segue: UIStoryboardSegue) {}
 
 }
