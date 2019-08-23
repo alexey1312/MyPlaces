@@ -17,7 +17,7 @@ protocol MapViewControllerDelegate {
 
 class MapViewController: UIViewController {
     
-    var mapViewControllerDelegate: MapViewControllerDelegate?
+    var mapViewControllerDelegate: MapViewControllerDelegate? 
     var place = Place()
     
     let annotationIdentifier = "annotationIdentifier"
