@@ -102,8 +102,7 @@ class NewPlaceViewController: UITableViewController {
         }
 
     }
-    
-    
+ 
     private func setupEditScreen() {
         if currentPlace != nil {
             

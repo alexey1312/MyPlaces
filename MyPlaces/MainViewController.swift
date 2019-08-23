@@ -64,18 +64,17 @@ class MainViewController: UITableViewController {
     }
 
         //Добавление свайпа с лева на право для релактирования ячеек
-//    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-//
-//        let place = places[indexPath.row]
-//        let action = UIContextualAction(style: .normal, title: "Delete") {_,_,_ in
-//
-//            StorageManager.deleteObject(place)
-//            tableView.deleteRows(at: [indexPath], with: .automatic)
-//    }
-//        let deleteAction = UISwipeActionsConfiguration.init(actions: [action])
-//
-//        return deleteAction
-//}
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+
+        _ = places[indexPath.row]
+        let action = UIContextualAction(style: .normal, title: "Edit") {_,_,_ in
+    
+    }
+        action.backgroundColor = .orange
+        let editAction = UISwipeActionsConfiguration.init(actions: [action])
+
+        return editAction
+}
 
 
 
