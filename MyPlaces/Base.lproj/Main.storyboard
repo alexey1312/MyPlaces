@@ -29,32 +29,23 @@
                                                 <constraint firstAttribute="width" constant="65" id="upf-Vd-oEj"/>
                                             </constraints>
                                         </imageView>
-                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="hge-28-Lhq">
+                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="hge-28-Lhq">
                                             <rect key="frame" x="96" y="8" width="263" height="69"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qJn-YQ-bRz">
-                                                    <rect key="frame" x="0.0" y="0.0" width="263" height="22"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="22" id="DKW-jk-ZfJ"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="0.0" y="0.0" width="263" height="23"/>
                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Bold" family="Apple SD Gothic Neo" pointSize="18"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ToR-gZ-f3v">
-                                                    <rect key="frame" x="0.0" y="22" width="263" height="22"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="22" id="rty-CL-C7r"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="0.0" y="23" width="263" height="23"/>
                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WSe-gc-jpI">
-                                                    <rect key="frame" x="0.0" y="44" width="263" height="25"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="22" id="xbe-Z8-O9E"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="0.0" y="46" width="263" height="23"/>
                                                     <fontDescription key="fontDescription" name="AppleSDGothicNeo-Regular" family="Apple SD Gothic Neo" pointSize="13"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
