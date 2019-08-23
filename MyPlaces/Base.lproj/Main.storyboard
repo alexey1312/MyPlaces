@@ -67,6 +67,10 @@
                                     <outlet property="locationLabel" destination="ToR-gZ-f3v" id="XxU-EB-I0g"/>
                                     <outlet property="nameLabel" destination="qJn-YQ-bRz" id="J3j-Ix-17G"/>
                                     <outlet property="typeLabel" destination="WSe-gc-jpI" id="zJq-Pi-9kp"/>
+                                    <segue destination="WUc-3I-Ck9" kind="show" identifier="showDetail" id="6bk-GG-iwL">
+                                        <segue key="commit" inheritsFrom="parent" id="aw2-3D-XZd"/>
+                                        <segue key="preview" inheritsFrom="commit" id="ygL-Pw-9B2"/>
+                                    </segue>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -75,10 +79,10 @@
                             <outlet property="delegate" destination="OTB-Xe-Jvf" id="VvU-Fb-jkN"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="My Places" id="dQX-k5-Hdk">
+                    <navigationItem key="navigationItem" title="My Places" largeTitleDisplayMode="never" id="dQX-k5-Hdk">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="WEj-Ij-ixd">
                             <connections>
-                                <segue destination="19M-Ls-p4B" kind="presentation" modalTransitionStyle="flipHorizontal" id="tp3-Ul-7EM"/>
+                                <segue destination="19M-Ls-p4B" kind="presentation" modalTransitionStyle="coverVertical" id="tp3-Ul-7EM"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -107,7 +111,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Photo" translatesAutoresizingMaskIntoConstraints="NO" id="BQS-qw-bC5">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="250"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="250.00000000000006"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -232,7 +236,7 @@
                             <outlet property="delegate" destination="WUc-3I-Ck9" id="2Zo-fc-SVJ"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="New Place" id="eEM-NH-83j">
+                    <navigationItem key="navigationItem" title="New Place" largeTitleDisplayMode="always" id="eEM-NH-83j">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="pqK-Z9-RyB">
                             <connections>
                                 <action selector="cancelAction:" destination="WUc-3I-Ck9" id="fv9-E4-hHs"/>
@@ -255,14 +259,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hda-2l-fgh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="qLi-DK-aZM" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2424.8000000000002" y="187.55622188905548"/>
+            <point key="canvasLocation" x="1737" y="188"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="brz-zf-qcG">
             <objects>
                 <navigationController id="cVu-WF-YSR" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WTs-nY-D6f">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" largeTitles="YES" id="WTs-nY-D6f">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="96"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <textAttributes key="titleTextAttributes">
                             <fontDescription key="fontDescription" name="SnellRoundhand-Black" family="Snell Roundhand" pointSize="25"/>
@@ -292,10 +296,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YP6-gW-hsx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1605.5999999999999" y="187.55622188905548"/>
+            <point key="canvasLocation" x="1737" y="-578"/>
         </scene>
     </scenes>
     <resources>
         <image name="Photo" width="195" height="196"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Bpu-WP-q37"/>
+    </inferredMetricsTieBreakers>
 </document>
