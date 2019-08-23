@@ -14,20 +14,43 @@ class MapViewController: UIViewController {
     
     var place = Place()
     let locationManager = CLLocationManager()
+    let regionInMeters = 5_000.00
+    var incomeSegueIndetifier = ""
     
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var mapPinImage: UIImageView!
+    @IBOutlet weak var adressLabel: UILabel!
+    @IBOutlet weak var doneButton: UIButton!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         checkLocationSevices()
-        setupPlacemark()
+        setupMapView()
          
     }
-
+    
+    @IBAction func centreViewInUserLocation() {
+        
+        showUserLocation()
+    }
+    
+    @IBAction func doneButtonPressed() {
+    }
+    
     @IBAction func closeVC() {
         dismiss(animated: true)
+    }
+    
+    private func setupMapView() {
+        if incomeSegueIndetifier == "showPlace" {
+            setupPlacemark()
+            mapPinImage.isHidden = true
+            adressLabel.isHidden = true
+            doneButton.isHidden = true
+        }
     }
     
     private func setupPlacemark() {
@@ -60,14 +83,19 @@ class MapViewController: UIViewController {
     }
     
     private func checkLocationSevices() {
+        
         if CLLocationManager.locationServicesEnabled() {
             setupLocationManager()
             checkLocationAutorization()
         } else {
-            //Show AllertController
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.showAlert(
+                    title: "Location Srvices are Disabled",
+                    message: "To enable it go: Settings -> Privacy -> Location Services and turn On"
+                )
         }
     }
-    
+}
     //Определяем точность геопозиции
     private func setupLocationManager() {
         locationManager.delegate = self
@@ -76,12 +104,20 @@ class MapViewController: UIViewController {
     
     //Обработка статуса включенной геолокации
     private func checkLocationAutorization() {
-        
         switch CLLocationManager.authorizationStatus() {
         case .authorizedWhenInUse:
             mapView.showsUserLocation = true
+            if incomeSegueIndetifier == "getAdress" {
+                showUserLocation()
+            }
             break
         case .denied:
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.showAlert(
+                                title: "You location is not Avaible",
+                                message: "To give permission Go to: Setting -> MyPlaces -> Location"
+                        )
+            }
             break
         //Show aAllertController
         case .notDetermined:
@@ -95,6 +131,26 @@ class MapViewController: UIViewController {
         @unknown default:
             print("New case is availebe")
         }
+    }
+
+private func showUserLocation() {
+    
+    if let location = locationManager.location?.coordinate {
+        let region = MKCoordinateRegion(center: location,
+                                        latitudinalMeters: regionInMeters,
+                                        longitudinalMeters: regionInMeters)
+        
+        mapView.setRegion(region, animated: true)
+    }
+}
+    
+    private func showAlert(title: String, message: String) {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        
+        alert.addAction(okAction)
+        present(alert, animated: true)
     }
 
     
