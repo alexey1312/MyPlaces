@@ -13,6 +13,7 @@ import CoreLocation
 class MapViewController: UIViewController {
     
     var place = Place()
+    let annotationIdentifier = "annotationIdentifier"
     let locationManager = CLLocationManager()
     let regionInMeters = 5_000.00
     var incomeSegueIndetifier = ""
@@ -20,13 +21,15 @@ class MapViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var mapPinImage: UIImageView!
-    @IBOutlet weak var adressLabel: UILabel!
+    @IBOutlet weak var addressLabel: UILabel!
     @IBOutlet weak var doneButton: UIButton!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addressLabel.text = ""
+        mapView.delegate = self
         checkLocationSevices()
         setupMapView()
          
@@ -48,7 +51,7 @@ class MapViewController: UIViewController {
         if incomeSegueIndetifier == "showPlace" {
             setupPlacemark()
             mapPinImage.isHidden = true
-            adressLabel.isHidden = true
+            addressLabel.isHidden = true
             doneButton.isHidden = true
         }
     }
@@ -86,7 +89,7 @@ class MapViewController: UIViewController {
         
         if CLLocationManager.locationServicesEnabled() {
             setupLocationManager()
-            checkLocationAutorization()
+            checkLocationAuthorization()
         } else {
             DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 self.showAlert(
@@ -103,11 +106,11 @@ class MapViewController: UIViewController {
     }
     
     //Обработка статуса включенной геолокации
-    private func checkLocationAutorization() {
+    private func checkLocationAuthorization() {
         switch CLLocationManager.authorizationStatus() {
         case .authorizedWhenInUse:
             mapView.showsUserLocation = true
-            if incomeSegueIndetifier == "getAdress" {
+            if incomeSegueIndetifier == "getAddress" {
                 showUserLocation()
             }
             break
@@ -133,16 +136,25 @@ class MapViewController: UIViewController {
         }
     }
 
-private func showUserLocation() {
+    private func showUserLocation() {
     
-    if let location = locationManager.location?.coordinate {
-        let region = MKCoordinateRegion(center: location,
+        if let location = locationManager.location?.coordinate {
+            let region = MKCoordinateRegion(center: location,
                                         latitudinalMeters: regionInMeters,
                                         longitudinalMeters: regionInMeters)
         
         mapView.setRegion(region, animated: true)
     }
 }
+    
+    private func getCenterLocation(for mapView: MKMapView) -> CLLocation {
+        
+        let latitude = mapView.centerCoordinate.latitude//ширина
+        let longitude = mapView.centerCoordinate.longitude//долгота
+        
+        return CLLocation(latitude: latitude, longitude: longitude)
+    }
+    
     
     private func showAlert(title: String, message: String) {
         
@@ -156,10 +168,67 @@ private func showUserLocation() {
     
 }
 
+
+extension MapViewController: MKMapViewDelegate {
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        guard !(annotation is MKUserLocation) else { return nil }
+        
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: annotationIdentifier) as? MKPinAnnotationView
+        
+        if annotationView == nil {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+            annotationView?.canShowCallout = true
+        }
+        
+        if let imageData = place.imageData {
+            
+            let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+            imageView.layer.cornerRadius = 10
+            imageView.clipsToBounds = true
+            imageView.image = UIImage(data: imageData)
+            annotationView?.rightCalloutAccessoryView = imageView
+        }
+        
+        return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        
+        let center = getCenterLocation(for: mapView)
+        let geocoder = CLGeocoder()
+        
+        geocoder.reverseGeocodeLocation(center) { (placemarks, error) in
+            
+            if let error = error {
+                print(error)
+                return
+            }
+            
+            guard let placemarks = placemarks else { return }
+            
+            let placemark = placemarks.first
+            let streetName = placemark?.thoroughfare
+            let buildNumber = placemark?.subThoroughfare
+            
+            DispatchQueue.main.async {
+                
+                if streetName != nil && buildNumber != nil {
+                    self.addressLabel.text = "\(streetName!), \(buildNumber!)"
+                } else if streetName != nil {
+                    self.addressLabel.text = "\(streetName!)"
+                } else {
+                    self.addressLabel.text = ""
+                }
+            }
+        }
+    }
+}
+
 extension MapViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        checkLocationAutorization()
+        checkLocationAuthorization()
     }
-    
 }

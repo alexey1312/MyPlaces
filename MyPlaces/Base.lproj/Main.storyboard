@@ -117,7 +117,7 @@
                                                     </constraints>
                                                     <state key="normal" image="Placeholder"/>
                                                     <connections>
-                                                        <segue destination="Sga-xY-Wh1" kind="presentation" identifier="getAdress" id="SKA-Ow-joq"/>
+                                                        <segue destination="Sga-xY-Wh1" kind="presentation" identifier="getAddress" id="SKA-Ow-joq"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -277,7 +277,7 @@
                         <viewLayoutGuide key="safeArea" id="blu-4A-fWv"/>
                     </view>
                     <connections>
-                        <outlet property="adressLabel" destination="WPd-UW-EpD" id="EDi-PQ-Ucr"/>
+                        <outlet property="addressLabel" destination="WPd-UW-EpD" id="EDi-PQ-Ucr"/>
                         <outlet property="doneButton" destination="qGp-JJ-psB" id="1bC-0e-yXu"/>
                         <outlet property="mapPinImage" destination="HpU-BC-kDZ" id="9FC-Ul-oSa"/>
                         <outlet property="mapView" destination="XE4-tX-7gM" id="1y2-Lb-cOj"/>
@@ -451,7 +451,7 @@
         <image name="map" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bTW-Vj-RSB"/>
+        <segue reference="SKA-Ow-joq"/>
         <segue reference="MJy-aq-PA6"/>
     </inferredMetricsTieBreakers>
 </document>
