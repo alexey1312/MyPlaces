@@ -9,8 +9,13 @@
 import UIKit
 import RealmSwift
 
-class MainViewController: UITableViewController {
+class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var reverstSortingButton: UIBarButtonItem!
+    
+    var ascendingSorting = true
     var places: Results<Place>!
     
     override func viewDidLoad() {
@@ -22,12 +27,12 @@ class MainViewController: UITableViewController {
 
     //MARK: - Table view data source
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return places.isEmpty ? 0: places.count
     }
 
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomTableViewCell
 
 
@@ -50,7 +55,7 @@ class MainViewController: UITableViewController {
     //MARK: Table view delegate
     
     //Добавление свайпа с права на лево для удаления ячеек
-    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
             
             let place = places[indexPath.row]
             let action = UIContextualAction(style: .destructive, title: "Delete") {_,_,_ in
@@ -64,7 +69,7 @@ class MainViewController: UITableViewController {
     }
 
         //Добавление свайпа с лева на право для релактирования ячеек
-    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 
         _ = places[indexPath.row]
         let action = UIContextualAction(style: .normal, title: "Edit") {_,_,_ in
@@ -98,5 +103,33 @@ class MainViewController: UITableViewController {
         tableView.reloadData()
     }
     
+    @IBAction func sortSelection(_ sender: UISegmentedControl) {
+        
+        sorting()
+    }
+    
+    
+    @IBAction func reversedSorting(_ sender: Any) {
+        
+        ascendingSorting.toggle()
+        if ascendingSorting {
+            reverstSortingButton.image = #imageLiteral(resourceName: "AZ")
+        } else {
+            reverstSortingButton.image = #imageLiteral(resourceName: "ZA")
+        }
+        
+        sorting()
+    }
+    
+    private func sorting() {
+        if segmentedControl.selectedSegmentIndex == 0 {
+            places = places.sorted(byKeyPath: "date", ascending: ascendingSorting)
+        } else {
+            places = places.sorted(byKeyPath: "name", ascending: ascendingSorting)
+        }
+        
+        //Обновить таблицу
+        tableView.reloadData()
+    }
     
 }
