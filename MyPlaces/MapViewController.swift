@@ -21,6 +21,7 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        checkLocationSevices()
         setupPlacemark()
          
     }
@@ -57,4 +58,52 @@ class MapViewController: UIViewController {
             self.mapView.selectAnnotation(annotation, animated: true)
         }
     }
+    
+    private func checkLocationSevices() {
+        if CLLocationManager.locationServicesEnabled() {
+            setupLocationManager()
+            checkLocationAutorization()
+        } else {
+            //Show AllertController
+        }
+    }
+    
+    //Определяем точность геопозиции
+    private func setupLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+    }
+    
+    //Обработка статуса включенной геолокации
+    private func checkLocationAutorization() {
+        
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedWhenInUse:
+            mapView.showsUserLocation = true
+            break
+        case .denied:
+            break
+        //Show aAllertController
+        case .notDetermined:
+            locationManager.requestWhenInUseAuthorization()
+        case .restricted:
+        //Show aAllertController
+            break
+        case .authorizedAlways:
+        //Show aAllertController
+            break
+        @unknown default:
+            print("New case is availebe")
+        }
+    }
+
+    
+}
+
+extension MapViewController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        checkLocationAutorization()
+    }
+    
 }
